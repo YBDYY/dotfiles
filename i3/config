@@ -61,8 +61,9 @@ bindsym $mod+Return exec kitty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+# start rofi
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -201,6 +202,7 @@ client.placeholder      #ffffff #0c0c0c #ffffff #222222   #ffffff
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+	position top
         status_command i3blocks
 	
 }
@@ -208,3 +210,18 @@ exec --no-startup-id ~/set_240hz.sh
 
 #printing to clipboard
 bindsym Print exec --no-startup-id flameshot gui --clipboard
+
+#screen saver and power management features disablement
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+
+for_window[class="^.*"] border pixel 0
+
+#for night light filter
+ exec --no-startup-id  redshift -O 4500
+
+exec --no-startup-id export GTK_MODULES=gdk_pixbuf
+exec --no-startup-id export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+
+# Launch rofi 
