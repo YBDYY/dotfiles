@@ -133,7 +133,27 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree Explorer" })
 		end,
 	},
-	--
+	{
+		"tpope/vim-fugitive",
+		cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit" },
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {
+			checkts = true, -- enable Treesitter integration
+		},
+		config = function(_, opts)
+			require("nvim-autopairs").setup(opts)
+
+			-- integrate with blink.cmp (autocompletion confirm = auto pair close)
+			local cmp_status, cmp = pcall(require, "cmp")
+			if cmp_status then
+				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			end
+		end,
+	},
 	{
 		"vyfor/cord.nvim",
 		build = ":Cord update",
