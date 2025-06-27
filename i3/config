@@ -237,3 +237,7 @@ exec --no-startup-id sh -c "sleep 1 && setxkbmap -layout us,lt -option grp:alt_s
 #dunst
 exec --no-startup-id dunst
 
+#swap esc and capslock
+
+exec --no-startup-id setxkbmap -option "caps:swapescape"
+
