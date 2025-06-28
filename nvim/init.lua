@@ -137,6 +137,16 @@ require("lazy").setup({
 		"tpope/vim-fugitive",
 		cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit" },
 	},
+	-- lazy.nvim
+	{
+		"folke/snacks.nvim",
+		---@type snacks.Config
+		opts = {
+			dashboard = {
+				-- your dashboard configuration comes here
+			},
+		},
+	},
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
