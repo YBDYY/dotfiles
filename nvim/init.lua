@@ -135,6 +135,12 @@ require("lazy").setup({
 		},
 		config = function()
 			require("neo-tree").setup({
+				filesystem = {
+					follow_current_file = {
+						enabled = true,
+					},
+					use_libuv_file_watcher = true, -- THIS enables auto updates
+				},
 				window = {
 					position = "left",
 					width = 30,
