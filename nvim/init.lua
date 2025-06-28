@@ -97,6 +97,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "c", "cpp", "h", "hpp" },
+	callback = function()
+		vim.bo.expandtab = false -- Use tabs, not spaces
+		vim.bo.tabstop = 4 -- Tab visually = 4 spaces
+		vim.bo.softtabstop = 4 -- <Tab>/<BS> = 4 columns
+		vim.bo.shiftwidth = 4 -- Auto-indent = 4 columns
+	end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -144,6 +154,17 @@ require("lazy").setup({
 		opts = {
 			dashboard = {
 				-- your dashboard configuration comes here
+			},
+		},
+	},
+	{
+		"folke/snacks.nvim",
+		---@type snacks.Config
+		opts = {
+			image = {
+				-- your image configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
 			},
 		},
 	},
