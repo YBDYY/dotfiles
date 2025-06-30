@@ -36,11 +36,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 #launch polybar
-exec --no-startup-id ~/.config/polybar/launch.sh
+#exec --no-startup-id ~/.config/polybar/launch.sh
 
 
 #wallpaper command
-exec --no-startup-id feh --bg-scale ~/Downloads/geras.jpg
+exec --no-startup-id feh --bg-scale ~/Downloads/adam.jpg
 
 #start picom for transparency and rounded corners
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
@@ -205,11 +205,11 @@ client.placeholder      #ffffff #0c0c0c #ffffff #222222   #ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-#	position top
-#        status_command i3blocks
+bar {
+	position top
+        status_command i3blocks
 	
-#}
+}
 #240hz here ------
 exec --no-startup-id ~/set_240hz.sh
 #240hz here ------

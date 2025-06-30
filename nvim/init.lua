@@ -62,6 +62,9 @@ vim.o.scrolloff = 10
 
 vim.o.confirm = true
 
+-- SHIFT + x for deleting without copying.
+vim.api.nvim_set_keymap("v", "X", '"_d', { noremap = true, silent = true })
+
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -147,6 +150,42 @@ require("lazy").setup({
 				},
 			})
 			vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree Explorer" })
+		end,
+	},
+	{ "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+	{
+		"echasnovski/mini.bufremove",
+		version = "*",
+		config = function()
+			vim.keymap.set("n", "<leader>bd", function()
+				require("mini.bufremove").delete(0, false)
+			end, { desc = "[B]uffer [D]elete (safe)" })
+		end,
+	},
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("bufferline").setup({
+				options = {
+					mode = "buffers", -- show buffer tabs (alternative: "tabs")
+					diagnostics = "nvim_lsp", -- show LSP errors/warnings
+					separator_style = "slant", -- or "thick", "thin", "padded_slant"
+					always_show_bufferline = true,
+					show_buffer_close_icons = true,
+					show_close_icon = false,
+					color_icons = true,
+					custom_filter = function(bufnr)
+						local ft = vim.bo[bufnr].filetype
+						return ft ~= "neo-tree"
+					end,
+				},
+			})
+
+			-- Keymaps for switching buffers
+			vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next buffer" })
+			vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
 		end,
 	},
 	{
@@ -632,7 +671,7 @@ require("lazy").setup({
 				},
 			})
 
-			vim.cmd.colorscheme("tokyonight-night")
+			vim.cmd.colorscheme("moonfly")
 			vim.cmd([[
       hi Normal guibg=NONE ctermbg=NONE
       hi NormalNC guibg=NONE ctermbg=NONE
