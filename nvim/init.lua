@@ -5,6 +5,11 @@ vim.g.maplocalleader = " "
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+--diagnostics
+vim.keymap.set("n", "<leader>n", function()
+	vim.diagnostic.setloclist()
+end, { desc = "Show diagnostics" })
+
 -- Make line numbers default
 vim.o.number = true
 
